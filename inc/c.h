@@ -15,4 +15,10 @@ typedef uint64_t u64;
 typedef char ch;
 typedef const char cc;
 
+#ifdef _WIN32
+typedef struct HINSTANCE__ inst;
+typedef struct HDC__ hdc;
+typedef struct tagRECT rect;
+#endif
+
 #endif // _C_H_

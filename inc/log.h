@@ -39,7 +39,19 @@
 #define LOG_LVL_NEVER 6
 
 //~ nicer timestamps / formatting
-#define LOG_INTERNAL1(time, tid, fac, lvl, fmt, ...) printf("%013lld %p %s %c\t" fmt "\n", time, tid, fac, lvl, ##__VA_ARGS__)
+extern FILE *LOG_FILE_HANDLE;
+
+#define LOG_INTERNAL1(time, tid, fac, lvl, fmt, ...)                                                     \
+    do                                                                                                   \
+    {                                                                                                    \
+        if (LOG_FILE_HANDLE)                                                                             \
+        {                                                                                                \
+            fprintf(LOG_FILE_HANDLE, "%013lld %p %s %c\t" fmt "\n", time, tid, fac, lvl, ##__VA_ARGS__); \
+            fflush(LOG_FILE_HANDLE);                                                                     \
+        }                                                                                                \
+        printf("%013lld %p %s %c\t" fmt "\n", time, tid, fac, lvl, ##__VA_ARGS__);                       \
+        fflush(stdout);                                                                                  \
+    } while (0)
 
 #include <stdlib.h>
 
@@ -53,8 +65,7 @@
             struct timespec tv;                                                                 \
             clock_gettime(CLOCK_REALTIME, &tv);                                                 \
             i64 time = tv.tv_sec % 1000 * 1000000000 + tv.tv_nsec;                              \
-            LOG_INTERNAL1(time, (void*) pthread_self(), fac##_NAME, lvl##_NAME, ##__VA_ARGS__); \
-            fflush(stdout);                                                                     \
+            LOG_INTERNAL1(time, (void *)pthread_self(), fac##_NAME, lvl##_NAME, ##__VA_ARGS__); \
         }                                                                                       \
     } while (0)
 #else
@@ -63,21 +74,22 @@
 #include <profileapi.h>
 #include <processthreadsapi.h>
 
-static __declspec(thread) void* this_tid = (void*) (LONGLONG) -1;
-static void* getTid()
+static __declspec(thread) void *this_tid = (void *)(LONGLONG)-1;
+static void *getTid()
 {
-    return this_tid != (void*) (LONGLONG) -1 ? this_tid : (this_tid=(void*) (LONGLONG) GetCurrentThreadId());
+    return this_tid != (void *)(LONGLONG)-1 ? this_tid : (this_tid = (void *)(LONGLONG)GetCurrentThreadId());
 }
 
-#define LOG_INTERNAL(fac,lvl, ...)                                                          \
-    do {                                                                                    \
-        if (fac <= lvl)                                                                     \
-        {                                                                                   \
-            LARGE_INTEGER time;                                                             \
-            QueryPerformanceCounter(&time);                                                 \
-            LOG_INTERNAL1(time.QuadPart, getTid(), fac##_NAME, lvl##_NAME, ##__VA_ARGS__);  \
-        }                                                                                   \
-    } while(0)
+#define LOG_INTERNAL(fac, lvl, ...)                                                        \
+    do                                                                                     \
+    {                                                                                      \
+        if (fac <= lvl)                                                                    \
+        {                                                                                  \
+            LARGE_INTEGER time;                                                            \
+            QueryPerformanceCounter(&time);                                                \
+            LOG_INTERNAL1(time.QuadPart, getTid(), fac##_NAME, lvl##_NAME, ##__VA_ARGS__); \
+        }                                                                                  \
+    } while (0)
 #endif
 
 #endif // _LOG_H_
