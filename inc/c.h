@@ -15,6 +15,9 @@ typedef uint16_t u16;  // [0, 65535]
 typedef uint32_t u32;  // [0, 4294967295]
 typedef uint64_t u64;  // [0, 18446744073709551615]
 
+#define VOID_MASK 0xFF00000000000001
+#define VOID_SHIFT 56
+
 typedef char ch;
 typedef const char cc;
 
