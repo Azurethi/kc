@@ -29,15 +29,15 @@ typedef i32 r32;
 typedef i64 r64;
 // typedef u64 ru64 //~ could reserve only N high values for errors, rather than entire -ve range.
 #define RET_OK 0
-#define RET_ERR -1      // Generic error.
-#define RET_MEM -2      // Out of memory.
-#define RET_NYI -3      // Not yet implemented.
-#define RET_UNSUP -4    // Unsupported argument.
-#define RET_INVAL -5    // Invalid argument.        //~ Consider a range of these (RET_INVAL_2)
-#define RET_TO  -6      // Timeout.
-#define RET_CONN -7     // Connection error.
-#define RET_PERM -8     // Permission error.
-#define RET_AGAIN -9    // Resource temporarily unavailable (EAGAIN / EWOULDBLOCK)
+#define RET_ERR -1   // Generic error
+#define RET_MEM -2   // Out of memory
+#define RET_NYI -3   // Not yet implemented
+#define RET_UNSUP -4 // Unsupported argument
+#define RET_INVAL -5 // Invalid argument         //~ Consider a range of these (RET_INVAL_2)
+#define RET_TO -6    // Timeout
+#define RET_CONN -7  // Connection error
+#define RET_PERM -8  // Permission error
+#define RET_AGAIN -9 // Resource temporarily unavailable (EAGAIN / EWOULDBLOCK)
 
 #ifdef _WIN32
 typedef struct HINSTANCE__ inst;
