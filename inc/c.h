@@ -43,6 +43,7 @@ typedef i64 r64;
 typedef struct HINSTANCE__ inst;
 typedef struct HDC__ hdc;
 typedef struct tagRECT rect;
+typedef struct tagMSG msg;
 #endif
 
 typedef struct _iobuf file;

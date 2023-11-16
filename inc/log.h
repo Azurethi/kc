@@ -18,9 +18,6 @@
 #define LOG_FATAL(...)
 #endif
 
-//~ add additional debug functions (test point hooks, entry/exit hooks etc)
-//~ consider preproc project (add hooks to functions based on some test def file)
-
 #include <stdio.h>
 #define LOG_LVL_TRACE_NAME 'T'
 #define LOG_LVL_DEBUG_NAME 'D'
@@ -38,9 +35,10 @@
 #define LOG_LVL_FATAL 5
 #define LOG_LVL_NEVER 6
 
-//~ nicer timestamps / formatting
 extern FILE *LOG_FILE_HANDLE;
 
+//~ Nicer timestamps / formatting.
+//~ Allow application defined hook / replacement.
 #define LOG_INTERNAL1(time, tid, fac, lvl, fmt, ...)                                                     \
     do                                                                                                   \
     {                                                                                                    \
