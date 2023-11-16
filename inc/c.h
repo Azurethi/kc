@@ -21,6 +21,11 @@ typedef uint64_t u64;  // [0, 18446744073709551615]
 typedef char ch;
 typedef const char cc;
 
+typedef i8 ret;
+#define RET_OK 0
+#define RET_ERR -1
+#define RET_MEM -2
+
 #ifdef _WIN32
 typedef struct HINSTANCE__ inst;
 typedef struct HDC__ hdc;
