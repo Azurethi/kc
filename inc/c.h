@@ -21,7 +21,12 @@ typedef uint64_t u64;  // [0, 18446744073709551615]
 typedef char ch;
 typedef const char cc;
 
-typedef i8 ret;
+// OS independent return types, <0 error, 0 OK, >0 application defined.
+typedef i8 r8;
+typedef i16 r16;
+typedef i32 r32;
+typedef i64 r64;
+// typedef u64 ru64 //~ could reserve only N high values for errors, rather than entire -ve range.
 #define RET_OK 0
 #define RET_ERR -1
 #define RET_MEM -2
