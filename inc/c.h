@@ -24,4 +24,6 @@ typedef struct HDC__ hdc;
 typedef struct tagRECT rect;
 #endif
 
+typedef struct _iobuf file;
+
 #endif // _C_H_
