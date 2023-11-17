@@ -1,6 +1,6 @@
-# c
+# kc
 
-A repo for useful common C things
+A repo for useful common C & K things
 
 ## c.h
 
