@@ -15,7 +15,18 @@ typedef uint16_t u16;  // [0, 65535]
 typedef uint32_t u32;  // [0, 4294967295]
 typedef uint64_t u64;  // [0, 18446744073709551615]
 
-#define VOID_MASK 0xFF00000000000001
+typedef const i8 ci8;   // [−128, 127]
+typedef const i16 ci16; // [−32768, 32767]
+typedef const i32 ci32; // [−2147483648, 2147483647]
+typedef const i64 ci64; // [−9223372036854775808, 9223372036854775807]
+typedef const u8 cu8;   // [0, 255]
+typedef const u16 cu16; // [0, 65535]
+typedef const u32 cu32; // [0, 4294967295]
+typedef const u64 cu64; // [0, 18446744073709551615]
+
+typedef size_t sz;
+
+#define VOID_MASK 0xFF00000000000000
 #define VOID_SHIFT 56
 
 typedef char ch;
@@ -29,15 +40,16 @@ typedef i32 r32;
 typedef i64 r64;
 // typedef u64 ru64 //~ could reserve only N high values for errors, rather than entire -ve range.
 #define RET_OK 0
-#define RET_ERR -1   // Generic error
-#define RET_MEM -2   // Out of memory
-#define RET_NYI -3   // Not yet implemented
-#define RET_UNSUP -4 // Unsupported argument
-#define RET_INVAL -5 // Invalid argument         //~ Consider a range of these (RET_INVAL_2)
-#define RET_TO -6    // Timeout
-#define RET_CONN -7  // Connection error
-#define RET_PERM -8  // Permission error
-#define RET_AGAIN -9 // Resource temporarily unavailable (EAGAIN / EWOULDBLOCK)
+#define RET_FALSE -1  // Not really an error, just returning false.
+#define RET_ERR -2    // Generic error
+#define RET_MEM -3    // Out of memory
+#define RET_NYI -4    // Not yet implemented
+#define RET_UNSUP -5  // Unsupported argument
+#define RET_INVAL -6  // Invalid argument         //~ Consider a range of these (RET_INVAL_2)
+#define RET_TO -7     // Timeout
+#define RET_CONN -8   // Connection error
+#define RET_PERM -9   // Permission error
+#define RET_AGAIN -10 // Resource temporarily unavailable (EAGAIN / EWOULDBLOCK)
 
 #ifdef _WIN32
 typedef struct HINSTANCE__ inst;

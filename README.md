@@ -6,6 +6,10 @@ A repo for useful common C things
 
 Stylistic typedefs
 
+## gen_util.h
+
+General common utility functions
+
 ## log.h
 
 Simple logging framework
