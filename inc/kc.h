@@ -1,8 +1,5 @@
-// Rework / extension of k.h from https://github.com/KxSystems/kdb/blob/c7a64a6d07db40622a534196389cb5885159bd35/c/c/k.h
 #ifndef _KC_H_
 #define _KC_H_
-
-#include "c.h"
 
 #define KXVER 3
 
@@ -158,5 +155,8 @@ extern double log(double);
 #define _Kz K // datetime   (DO NOT USE)
 #define _Ka K // table
 #define _Ky K // dict
+
+//~ Annotations for more complex types?
+// eg {int|int[]}, {::|sym|sym[]}
 
 #endif // _KC_H_
