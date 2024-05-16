@@ -72,7 +72,12 @@ extern FILE *LOG_FILE_HANDLE;
 #include <profileapi.h>
 #include <processthreadsapi.h>
 
+#ifndef WINMSVC
+static __thread void *this_tid = (void *)(LONGLONG)-1;
+#else
 static __declspec(thread) void *this_tid = (void *)(LONGLONG)-1;
+#endif
+
 static void *getTid()
 {
     return this_tid != (void *)(LONGLONG)-1 ? this_tid : (this_tid = (void *)(LONGLONG)GetCurrentThreadId());
